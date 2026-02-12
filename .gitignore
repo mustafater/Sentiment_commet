@@ -1,0 +1,23 @@
+# Rust
+target/
+**/*.rs.bk
+
+# Node/JS
+node_modules/
+dist/
+build/
+pkg/
+.npm
+.yarn
+
+# Application
+.env
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Soroban
+.soroban/
+target/wasm32-unknown-unknown/release/*.wasm

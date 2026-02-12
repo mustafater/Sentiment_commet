@@ -1,0 +1,72 @@
+[package]
+name = "dene"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+leptos = { version = "0.7", features = [] }
+leptos_meta = { version = "0.7" }
+leptos_router = { version = "0.7" }
+leptos_config = { version = "0.7", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+cfg-if = "1"
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = ["Window", "Document", "HtmlElement", "HtmlTextAreaElement", "console", "SubmitEvent", "EventTarget", "Element"] }
+console_error_panic_hook = "0.1"
+getrandom = { version = "0.2", features = ["js"] }
+wasm-bindgen-futures = "0.4"
+gloo-timers = { version = "0.3", features = ["futures"] }
+
+# Server-only dependencies
+mongodb = { version = "3", optional = true }
+bson = { version = "2", features = ["chrono-0_4"], optional = true }
+tokio = { version = "1", features = ["full"], optional = true }
+actix-web = { version = "4", optional = true }
+actix-files = { version = "0.6", optional = true }
+leptos_actix = { version = "0.7", optional = true }
+futures = { version = "0.3", optional = true }
+once_cell = { version = "1", optional = true }
+dotenv = { version = "0.15", optional = true }
+log = "0.4"
+simple_logger = { version = "5", optional = true }
+
+[features]
+default = []
+hydrate = ["leptos/hydrate"]
+ssr = [
+    "dep:mongodb",
+    "dep:bson",
+    "dep:tokio",
+    "dep:actix-web",
+    "dep:actix-files",
+    "dep:leptos_actix",
+    "dep:futures",
+    "dep:once_cell",
+    "dep:dotenv",
+    "dep:leptos_config",
+    "dep:simple_logger",
+    "leptos/ssr",
+    "leptos_meta/ssr",
+    "leptos_router/ssr",
+]
+
+[package.metadata.leptos]
+output-name = "dene"
+site-root = "target/site"
+site-pkg-dir = "pkg"
+style-file = "style/main.css"
+assets-dir = "public"
+site-addr = "127.0.0.1:3000"
+reload-port = 3001
+browserquery = "defaults"
+watch = false
+env = "DEV"
+bin-features = ["ssr"]
+bin-default-features = false
+lib-features = ["hydrate"]
+lib-default-features = false
